@@ -12,10 +12,10 @@ export default function Screenshots() {
       <div className="mx-auto max-w-6xl px-5">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900">
-            Take a look
+            Ganito &apos;yung app
           </h2>
           <p className="mt-3 text-slate-600">
-            Replace these placeholders with real screenshots of your app.
+            Simple lang — pero gumagana. (Palitan ng totoong screenshots ng app mo.)
           </p>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">

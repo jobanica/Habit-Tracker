@@ -7,7 +7,7 @@ export default function Hero() {
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-5 py-16 md:grid-cols-2 md:py-24">
         <div className="text-center md:text-left">
           <span className="inline-block rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-700">
-            One-time purchase · No subscription
+            One-time · Walang subscription
           </span>
           <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
             {config.tagline}
@@ -20,10 +20,10 @@ export default function Hero() {
               href="#buy"
               className="w-full rounded-xl bg-indigo-600 px-8 py-4 text-center text-lg font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700 sm:w-auto"
             >
-              Buy Now — {formatPrice()}
+              Get the App — {formatPrice()}
             </a>
             <span className="text-sm text-slate-500">
-              Instant download after payment
+              GCash · Maya · Card · Instant download after payment
             </span>
           </div>
         </div>

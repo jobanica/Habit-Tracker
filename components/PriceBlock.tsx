@@ -1,54 +1,29 @@
-import { config, formatPrice } from "@/lib/config";
-
-const perks = [
-  "One-time payment — no subscription",
-  "Instant Google Drive access after payment",
-  "Download anytime from your private link",
-  "Pay with GCash, Maya, card or bank transfer",
-];
+import { formatPrice } from "@/lib/config";
 
 export default function PriceBlock() {
   return (
     <section className="mx-auto max-w-6xl px-5 py-16 md:py-24">
       <div className="mx-auto max-w-md rounded-3xl border border-indigo-100 bg-gradient-to-b from-white to-indigo-50 p-8 text-center shadow-lg">
-        <p className="text-sm font-semibold uppercase tracking-wide text-indigo-600">
-          {config.productName}
-        </p>
-        <div className="mt-4 flex items-baseline justify-center gap-1">
-          <span className="text-5xl font-extrabold tracking-tight text-slate-900">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+          {formatPrice()}. One-time. Sa&apos;yo na.
+        </h2>
+        <div className="mt-6 flex items-baseline justify-center gap-1">
+          <span className="text-6xl font-extrabold tracking-tight text-slate-900">
             {formatPrice()}
           </span>
-          <span className="text-lg text-slate-500">one-time</span>
         </div>
-        <ul className="mt-8 space-y-3 text-left">
-          {perks.map((perk) => (
-            <li key={perk} className="flex items-start gap-3 text-slate-700">
-              <svg
-                className="mt-0.5 shrink-0 text-indigo-600"
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M4 10.5l4 4 8-9"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span>{perk}</span>
-            </li>
-          ))}
-        </ul>
+        <p className="mt-4 text-slate-600">
+          Presyo ng isang milk tea run — pero ito, gagamitin mo araw-araw.
+        </p>
         <a
           href="#buy"
           className="mt-8 block w-full rounded-xl bg-indigo-600 px-8 py-4 text-center text-lg font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700"
         >
-          Buy Now
+          Get the App — {formatPrice()}
         </a>
+        <p className="mt-4 text-xs text-slate-500">
+          Secure checkout via Xendit · Instant download pagkatapos magbayad
+        </p>
       </div>
     </section>
   );

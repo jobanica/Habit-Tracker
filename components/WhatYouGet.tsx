@@ -1,27 +1,25 @@
+import { formatPrice } from "@/lib/config";
+
 const items = [
   {
-    title: "The full Habit Tracker app",
-    body: "Delivered as a downloadable ZIP — yours to keep forever.",
+    title: "Unlimited habits",
+    body: "Walang “upgrade to add more” na lalabas.",
   },
   {
-    title: "Daily & weekly habit views",
-    body: "See what's due today and track streaks at a glance.",
+    title: "Streak tracking",
+    body: "Kita mo agad kung ilang araw ka nang consistent.",
   },
   {
-    title: "Progress charts",
-    body: "Visualize consistency so you stay motivated week after week.",
+    title: "Progress analytics",
+    body: "Weekly at monthly view para alam mo kung ano'ng gumagana.",
   },
   {
-    title: "Clean, distraction-free design",
-    body: "No ads, no bloat, no login required to use it.",
+    title: "Works on your phone",
+    body: "Install mo parang app, gamit mo kahit saan.",
   },
   {
-    title: "Works offline",
-    body: "Your data stays on your device. Fast and private.",
-  },
-  {
-    title: "Free updates",
-    body: "Placeholder: describe your update policy here.",
+    title: "Yours forever",
+    body: "One-time payment. Ito na 'yun. Wala nang kasunod.",
   },
 ];
 
@@ -30,12 +28,8 @@ export default function WhatYouGet() {
     <section className="mx-auto max-w-6xl px-5 py-16 md:py-24">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight text-slate-900">
-          What&apos;s inside
+          Ano&apos;ng kasama sa {formatPrice()}?
         </h2>
-        <p className="mt-3 text-slate-600">
-          Everything you need to build habits that stick — edit this copy to match
-          your product.
-        </p>
       </div>
       <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => (

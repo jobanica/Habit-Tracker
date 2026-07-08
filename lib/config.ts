@@ -6,9 +6,15 @@
 export const config = {
   // --- Product ---
   productName: "Habit Tracker",
-  tagline: "Build habits that actually stick.",
+  tagline:
+    "Isang habit tracker na binili mo minsan. Hindi binabayaran buwan-buwan.",
   subheadline:
-    "A simple, focused habit tracker that helps you show up every day — no bloat, no subscriptions, just progress you can see.",
+    "Track your habits, protect your streaks, at makita ang progress mo — ₱149 one-time. Walang subscription, walang ads, walang paywall sa gitna.",
+
+  // --- SEO / meta ---
+  pageTitle: "Habit Tracker App — ₱149 One-Time, No Subscription",
+  metaDescription:
+    "Track habits, build streaks, and see your progress. One-time ₱149 via GCash, Maya, or card. Instant download. No subscription, no ads, no account needed.",
 
   // --- Pricing (one-time) ---
   // Xendit amount is a plain number in the given currency's major unit.
