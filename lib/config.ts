@@ -1,6 +1,6 @@
 /**
  * Single source of truth for product + commerce settings.
- * Edit copy and pricing here — do not hardcode these values elsewhere.
+ * Edit copy, pricing, and the download link here.
  */
 
 export const config = {
@@ -15,15 +15,12 @@ export const config = {
   priceAmount: 149,
   currency: "PHP" as const,
 
-  // --- Delivery / product file ---
-  // Filename of the ZIP uploaded to the private Supabase Storage bucket `product`.
-  productFilename: "habit-tracker.zip",
-  storageBucket: "product",
-
-  // --- Download link security ---
-  downloadTokenTtlDays: 7,
-  maxDownloads: 5,
-  signedUrlTtlSeconds: 60,
+  // --- Delivery ---
+  // The Google Drive link customers get after paying.
+  // In Drive: right-click the file/folder → Share → "Anyone with the link"
+  // (Viewer) → Copy link → paste it here. This link is only ever shown on a
+  // payment-verified page, never on a public page.
+  googleDriveUrl: "https://drive.google.com/REPLACE_WITH_YOUR_SHARE_LINK",
 
   // --- Invoice ---
   // How long a Xendit invoice stays payable (seconds). 24h.

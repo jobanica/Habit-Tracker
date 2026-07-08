@@ -2,8 +2,8 @@ import { config, formatPrice } from "@/lib/config";
 
 const perks = [
   "One-time payment — no subscription",
-  "Instant download after payment",
-  "Emailed to you as well",
+  "Instant Google Drive access after payment",
+  "Download anytime from your private link",
   "Pay with GCash, Maya, card or bank transfer",
 ];
 

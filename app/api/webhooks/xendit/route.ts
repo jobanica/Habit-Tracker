@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import { isPaidStatus } from "@/lib/xendit";
 import { findByExternalId, markPaidWithToken } from "@/lib/purchases";
-import { sendDeliveryEmail } from "@/lib/resend";
 import { generateToken } from "@/lib/format";
-import { config } from "@/lib/config";
 
 export const runtime = "nodejs";
 
@@ -48,35 +46,16 @@ export async function POST(req: Request) {
       return NextResponse.json({ received: true });
     }
 
-    // Idempotency: only the first transition from pending -> paid provisions
-    // a token and sends the email. Concurrent/duplicate callbacks no-op.
-    const token = generateToken();
-    const expiresAt = new Date(
-      Date.now() + config.downloadTokenTtlDays * 24 * 60 * 60 * 1000,
-    ).toISOString();
-
+    // Idempotency: only the first transition from pending -> paid attaches a
+    // token. Concurrent/duplicate callbacks no-op.
     const updated = await markPaidWithToken({
       externalId,
-      token,
-      tokenExpiresAt: expiresAt,
-      downloadsRemaining: config.maxDownloads,
+      token: generateToken(),
     });
 
     if (!updated) {
       // Already paid — nothing to do.
       return NextResponse.json({ received: true, duplicate: true });
-    }
-
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL;
-    const downloadUrl = `${appUrl}/download/${updated.download_token}`;
-
-    // Email is a second delivery channel; the thank-you page also shows the
-    // link. Don't fail the webhook (and trip the idempotency guard on retry)
-    // just because email delivery hiccuped — log and move on.
-    try {
-      await sendDeliveryEmail({ to: updated.email, downloadUrl });
-    } catch (mailErr) {
-      console.error(`[webhook] delivery email failed for ${externalId}:`, mailErr);
     }
 
     return NextResponse.json({ received: true });

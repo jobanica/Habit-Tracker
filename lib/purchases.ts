@@ -13,8 +13,6 @@ export interface Purchase {
   xendit_invoice_id: string | null;
   status: "pending" | "paid";
   download_token: string | null;
-  token_expires_at: string | null;
-  downloads_remaining: number | null;
   created_at: string;
   paid_at: string | null;
 }
@@ -61,15 +59,13 @@ export async function findByToken(token: string): Promise<Purchase | null> {
 }
 
 /**
- * Idempotently mark a purchase paid and provision its download token.
+ * Idempotently mark a purchase paid and attach its private access token.
  * Only flips a row that is still `pending` (guards against double webhooks).
  * Returns the updated purchase, or null if it was already paid / not found.
  */
 export async function markPaidWithToken(params: {
   externalId: string;
   token: string;
-  tokenExpiresAt: string;
-  downloadsRemaining: number;
 }): Promise<Purchase | null> {
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase
@@ -77,8 +73,6 @@ export async function markPaidWithToken(params: {
     .update({
       status: "paid",
       download_token: params.token,
-      token_expires_at: params.tokenExpiresAt,
-      downloads_remaining: params.downloadsRemaining,
       paid_at: new Date().toISOString(),
     })
     .eq("external_id", params.externalId)
@@ -87,18 +81,4 @@ export async function markPaidWithToken(params: {
     .maybeSingle();
   if (error) throw new Error(`markPaidWithToken failed: ${error.message}`);
   return (data as Purchase) ?? null;
-}
-
-/**
- * Atomically decrement downloads_remaining for a valid token.
- * Guarded on status='paid' and downloads_remaining > 0 so a race can't
- * push the counter negative. Returns true if a row was decremented.
- */
-export async function decrementDownloads(token: string): Promise<boolean> {
-  const supabase = getSupabaseAdmin();
-  const { data, error } = await supabase.rpc("decrement_download", {
-    p_token: token,
-  });
-  if (error) throw new Error(`decrementDownloads failed: ${error.message}`);
-  return data === true;
 }

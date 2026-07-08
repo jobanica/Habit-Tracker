@@ -45,8 +45,8 @@ export default function BuySection() {
           Get your copy
         </h2>
         <p className="mt-3 text-indigo-100">
-          Enter your email and check out securely. Your download link arrives
-          instantly and by email.
+          Enter your email and check out securely. You get instant Google Drive
+          access the moment your payment is confirmed.
         </p>
 
         <form
