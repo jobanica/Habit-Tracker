@@ -1,5 +1,3 @@
-import { config } from "@/lib/config";
-
 const faqs = [
   {
     q: "What payment methods can I use?",
@@ -7,15 +5,15 @@ const faqs = [
   },
   {
     q: "How do I get the product after paying?",
-    a: "Instantly. Right after payment you land on a page with your download link, and we also email the same secure link to you.",
+    a: "Instantly. The moment your payment is confirmed you land on a page with your Google Drive download — one click and it's yours.",
   },
   {
     q: "Do I need an account?",
-    a: "No. There's no sign-up and no login — just your email so we can send your download link.",
+    a: "No. There's no sign-up and no login — just your email so we can tie the download to your purchase.",
   },
   {
-    q: "How long is my download link valid?",
-    a: `Your secure link works for ${config.downloadTokenTtlDays} days and allows up to ${config.maxDownloads} downloads. Need it re-sent? Just contact us.`,
+    q: "Can I download it again later?",
+    a: "Yes. Your purchase gives you a private access link you can bookmark and reopen anytime. Lost it? Just contact us.",
   },
   {
     q: "What's your refund policy?",

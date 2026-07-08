@@ -52,21 +52,6 @@ export default async function DownloadPage({
     return <InvalidLink reason="We couldn't find a purchase for this link." />;
   }
 
-  const expired =
-    purchase.token_expires_at != null &&
-    new Date(purchase.token_expires_at).getTime() < Date.now();
-  if (expired) {
-    return (
-      <InvalidLink reason="This link has expired. We can re-send you a fresh one." />
-    );
-  }
-
-  if ((purchase.downloads_remaining ?? 0) <= 0) {
-    return (
-      <InvalidLink reason="This link has reached its download limit. Contact us for a new one." />
-    );
-  }
-
   return (
     <main className="flex min-h-screen items-center justify-center bg-slate-50 px-5">
       <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
@@ -85,21 +70,19 @@ export default async function DownloadPage({
           Your download is ready
         </h1>
         <p className="mt-2 text-slate-600">
-          Click below to download <strong>{config.productName}</strong>.
+          Open <strong>{config.productName}</strong> on Google Drive to download it.
         </p>
         <a
-          href={`/download/${token}/deliver`}
+          href={config.googleDriveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className="mt-6 block w-full rounded-xl bg-indigo-600 px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700"
         >
-          Download {config.productName}
+          Open on Google Drive
         </a>
         <p className="mt-4 text-xs text-slate-500">
-          {purchase.downloads_remaining} download
-          {purchase.downloads_remaining === 1 ? "" : "s"} remaining · link valid
-          until{" "}
-          {purchase.token_expires_at
-            ? new Date(purchase.token_expires_at).toLocaleDateString()
-            : "—"}
+          Bookmark this page — it&apos;s your private link to access the download
+          anytime.
         </p>
       </div>
     </main>
