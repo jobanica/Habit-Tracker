@@ -6,19 +6,19 @@ const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl),
-  title: `${config.productName} — ${config.tagline}`,
-  description: config.subheadline,
+  title: config.pageTitle,
+  description: config.metaDescription,
   openGraph: {
-    title: `${config.productName} — ${config.tagline}`,
-    description: config.subheadline,
+    title: config.pageTitle,
+    description: config.metaDescription,
     url: appUrl,
     siteName: config.productName,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${config.productName} — ${config.tagline}`,
-    description: config.subheadline,
+    title: config.pageTitle,
+    description: config.metaDescription,
   },
 };
 

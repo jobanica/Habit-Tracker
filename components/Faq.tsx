@@ -1,23 +1,29 @@
+import { config } from "@/lib/config";
+
 const faqs = [
   {
-    q: "What payment methods can I use?",
-    a: "You can pay with GCash, Maya, credit/debit card, or bank transfer through our secure checkout powered by Xendit.",
+    q: "Paano ako magbabayad?",
+    a: "GCash, Maya, credit/debit card, o bank transfer — lahat secure via Xendit checkout.",
   },
   {
-    q: "How do I get the product after paying?",
-    a: "Instantly. The moment your payment is confirmed you land on a page with your Google Drive download — one click and it's yours.",
+    q: "Paano ko makukuha 'yung app?",
+    a: "Pagkatapos magbayad, lalabas agad sa screen ang Google Drive download mo — one click at sa'yo na. Wala pang isang minuto.",
   },
   {
-    q: "Do I need an account?",
-    a: "No. There's no sign-up and no login — just your email so we can tie the download to your purchase.",
+    q: "May monthly fee ba?",
+    a: "Wala. ₱149 one-time lang. No subscription, no hidden charges, no upsell.",
   },
   {
-    q: "Can I download it again later?",
-    a: "Yes. Your purchase gives you a private access link you can bookmark and reopen anytime. Lost it? Just contact us.",
+    q: "Kailangan ko bang gumawa ng account?",
+    a: "Hindi. Email mo lang para ma-tie sa purchase mo at para may resibo ka. 'Yun lang.",
   },
   {
-    q: "What's your refund policy?",
-    a: "Placeholder: state your refund policy here (e.g. digital goods are non-refundable, or a 7-day money-back guarantee).",
+    q: "Paano i-install?",
+    a: "Placeholder — palitan mo ito ng totoong steps para sa ZIP mo (hal. i-download, i-extract, buksan sa phone/browser). Maging honest dito para walang refund request.",
+  },
+  {
+    q: "Paano kung nawala ko 'yung download link?",
+    a: `Message mo lang kami sa ${config.supportEmail} gamit ang email na ginamit mo sa bayad — bibigyan ka namin ulit ng access.`,
   },
 ];
 
@@ -26,7 +32,7 @@ export default function Faq() {
     <section className="bg-slate-50 py-16 md:py-24">
       <div className="mx-auto max-w-3xl px-5">
         <h2 className="text-center text-3xl font-bold tracking-tight text-slate-900">
-          Frequently asked questions
+          Mga tanong na madalas
         </h2>
         <div className="mt-10 divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200 bg-white">
           {faqs.map((faq) => (

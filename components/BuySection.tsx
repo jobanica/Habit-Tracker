@@ -42,27 +42,28 @@ export default function BuySection() {
     <section id="buy" className="scroll-mt-8 bg-indigo-600 py-16 md:py-24">
       <div className="mx-auto max-w-lg px-5 text-center">
         <h2 className="text-3xl font-bold tracking-tight text-white">
-          Get your copy
+          Simulan mo na &apos;yung habit na laging &ldquo;next week na lang.&rdquo;
         </h2>
-        <p className="mt-3 text-indigo-100">
-          Enter your email and check out securely. You get instant Google Drive
-          access the moment your payment is confirmed.
+        <p className="mt-3 text-lg text-indigo-100">
+          {formatPrice()} ngayon. Streak mo bukas.
         </p>
 
         <form
           onSubmit={handleSubmit}
-          className="mx-auto mt-8 flex max-w-md flex-col gap-3"
-          noValidate
+          className="mx-auto mt-8 flex max-w-md flex-col gap-3 text-left"
         >
+          <label htmlFor="buy-email" className="text-sm font-medium text-indigo-100">
+            Saan namin ipapadala ang resibo?
+          </label>
           <input
+            id="buy-email"
             type="email"
             inputMode="email"
             autoComplete="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@email.com"
-            aria-label="Email address"
+            placeholder="juan@email.com"
             className="w-full rounded-xl border-0 px-5 py-4 text-slate-900 shadow-sm outline-none ring-2 ring-transparent focus:ring-indigo-300"
           />
           <button
@@ -78,7 +79,7 @@ export default function BuySection() {
             </p>
           )}
         </form>
-        <p className="mt-4 text-xs text-indigo-200">
+        <p className="mt-4 text-center text-xs text-indigo-200">
           Secure checkout via Xendit · GCash · Maya · Card · Bank transfer
         </p>
       </div>
