@@ -20,7 +20,8 @@ export const config = {
   // In Drive: right-click the file/folder → Share → "Anyone with the link"
   // (Viewer) → Copy link → paste it here. This link is only ever shown on a
   // payment-verified page, never on a public page.
-  googleDriveUrl: "https://drive.google.com/REPLACE_WITH_YOUR_SHARE_LINK",
+  googleDriveUrl:
+    "https://drive.google.com/drive/folders/11ADoxgmFZ5SupSqh5_4D6NXRes85f6VA?usp=drive_link",
 
   // --- Invoice ---
   // How long a Xendit invoice stays payable (seconds). 24h.
