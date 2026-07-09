@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { findByExternalId } from "@/lib/purchases";
+import { findByExternalId, markPaidWithToken } from "@/lib/purchases";
 import { getInvoice, isPaidStatus } from "@/lib/xendit";
-import { maskEmail } from "@/lib/format";
+import { maskEmail, generateToken } from "@/lib/format";
 import { config, downloadUrl } from "@/lib/config";
+import { sendDeliveryEmail } from "@/lib/email";
 import ProcessingRefresh from "@/components/ProcessingRefresh";
 
 export const runtime = "nodejs";
@@ -39,7 +40,7 @@ export default async function ThankYouPage({
     );
   }
 
-  const purchase = await findByExternalId(order);
+  let purchase = await findByExternalId(order);
 
   // Verify payment status directly with Xendit — never trust the redirect alone.
   let paidAtXendit = false;
@@ -50,6 +51,31 @@ export default async function ThankYouPage({
     } catch {
       // Treat as not-yet-confirmed; the page will keep polling.
       paidAtXendit = false;
+    }
+  }
+
+  // Self-heal: Xendit confirms payment but the order isn't provisioned yet.
+  // Don't wait on the webhook (it may be misconfigured or delayed) — provision
+  // the download right here. markPaidWithToken only flips a still-`pending` row,
+  // so this races safely with the webhook: exactly one caller attaches a token
+  // and sends the email, the other no-ops.
+  if (purchase && paidAtXendit && purchase.status !== "paid") {
+    const provisioned = await markPaidWithToken({
+      externalId: order,
+      token: generateToken(),
+    });
+    if (provisioned) {
+      purchase = provisioned;
+      try {
+        const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim();
+        const link = `${appUrl}/download/${provisioned.download_token}`;
+        await sendDeliveryEmail({ to: provisioned.email, downloadUrl: link });
+      } catch (mailErr) {
+        console.error(`[thank-you] delivery email failed for ${order}:`, mailErr);
+      }
+    } else {
+      // The webhook won the race and provisioned first — re-read the fresh row.
+      purchase = await findByExternalId(order);
     }
   }
 
