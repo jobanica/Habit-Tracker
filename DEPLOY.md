@@ -72,6 +72,8 @@ Settings → Environment Variables), for Production (and Preview if you want):
 | `XENDIT_CALLBACK_TOKEN` | Xendit webhook verification token |
 | `SUPABASE_URL` | Supabase project URL |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase **service_role** key |
+| `RESEND_API_KEY` | Resend API key (from https://resend.com/api-keys) |
+| `RESEND_FROM_EMAIL` | Verified sender, e.g. `Habit Tracker <no-reply@yourdomain.com>` |
 | `NEXT_PUBLIC_APP_URL` | Your public URL, e.g. `https://you.com` (no trailing slash) |
 
 > `NEXT_PUBLIC_APP_URL` must be the real deployed URL — it's used for the Xendit
