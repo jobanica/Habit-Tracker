@@ -12,8 +12,8 @@ export const runtime = "nodejs";
  * accepted events so Xendit doesn't retry unnecessarily.
  */
 export async function POST(req: Request) {
-  const expected = process.env.XENDIT_CALLBACK_TOKEN;
-  const received = req.headers.get("x-callback-token");
+  const expected = process.env.XENDIT_CALLBACK_TOKEN?.trim();
+  const received = req.headers.get("x-callback-token")?.trim();
 
   if (!expected || received !== expected) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
