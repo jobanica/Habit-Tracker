@@ -57,7 +57,18 @@ Project Settings → API:
      ```
      https://<your-domain>/api/webhooks/xendit
      ```
+   - **Use the exact canonical host.** If your site redirects apex → `www`
+     (or vice-versa), register the callback on the host it redirects *to*
+     (e.g. `https://www.<your-domain>/...`). Xendit does not follow the 308
+     redirect, so a callback on the wrong host is silently dropped and buyers
+     get stuck on "Finalizing your order…".
    - You can test the webhook from the same page ("Test" button) once deployed.
+
+> Delivery is also self-healing: the thank-you page verifies payment directly
+> with Xendit and provisions the download itself if the webhook is late, so a
+> misconfigured webhook degrades gracefully rather than stranding buyers who
+> land back on the site. The webhook still matters for buyers whose
+> post-payment redirect never returns (common with GCash in-app browsers).
 
 ---
 
