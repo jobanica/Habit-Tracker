@@ -12,8 +12,11 @@ let cached: SupabaseClient | null = null;
 export function getSupabaseAdmin(): SupabaseClient {
   if (cached) return cached;
 
-  const url = process.env.SUPABASE_URL;
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  // .trim() strips stray whitespace AND Unicode line/paragraph separators
+  // (U+2028/U+2029) that can sneak in when pasting keys into a dashboard —
+  // those characters are invalid in HTTP headers and would crash every request.
+  const url = process.env.SUPABASE_URL?.trim();
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
   if (!url || !serviceKey) {
     throw new Error(
       "SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set",

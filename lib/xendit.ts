@@ -12,7 +12,9 @@ import { config } from "./config";
 const XENDIT_BASE = "https://api.xendit.co";
 
 function authHeader(): string {
-  const key = process.env.XENDIT_SECRET_KEY;
+  // .trim() guards against stray whitespace / Unicode separators pasted into
+  // the dashboard, which would be invalid in the HTTP header.
+  const key = process.env.XENDIT_SECRET_KEY?.trim();
   if (!key) throw new Error("XENDIT_SECRET_KEY is not set");
   // Basic auth: base64("<secret_key>:")
   return `Basic ${Buffer.from(`${key}:`).toString("base64")}`;
