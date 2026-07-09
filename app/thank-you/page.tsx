@@ -2,7 +2,7 @@ import Link from "next/link";
 import { findByExternalId } from "@/lib/purchases";
 import { getInvoice, isPaidStatus } from "@/lib/xendit";
 import { maskEmail } from "@/lib/format";
-import { config } from "@/lib/config";
+import { config, downloadUrl } from "@/lib/config";
 import ProcessingRefresh from "@/components/ProcessingRefresh";
 
 export const runtime = "nodejs";
@@ -67,16 +67,15 @@ export default async function ThankYouPage({
         </div>
         <h1 className="mt-4 text-2xl font-bold text-slate-900">Payment complete 🎉</h1>
         <p className="mt-2 text-slate-600">
-          Thanks for buying <strong>{config.productName}</strong>! Open it on
-          Google Drive below.
+          Thanks for buying <strong>{config.productName}</strong>! I-click ang
+          button sa baba para i-download ang copy mo.
         </p>
         <a
-          href={config.googleDriveUrl}
-          target="_blank"
+          href={downloadUrl()}
           rel="noopener noreferrer"
           className="mt-6 block w-full rounded-xl bg-indigo-600 px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700"
         >
-          Open on Google Drive
+          Download {config.productName}
         </a>
         <p className="mt-4 text-sm text-slate-500">
           Pinadala rin namin ang link sa{" "}
