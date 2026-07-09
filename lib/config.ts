@@ -31,7 +31,7 @@ export const config = {
   // "/d/" and "/view" — and paste ONLY that ID below.
   // Example link: https://drive.google.com/file/d/ABC123xyz/view?usp=sharing
   //          →    driveFileId: "ABC123xyz"
-  driveFileId: "PASTE_DRIVE_FILE_ID",
+  driveFileId: "1burGx8wGeeAQpZ09obbgg3QMooiMsLUp",
 
   // --- Invoice ---
   // How long a Xendit invoice stays payable (seconds). 24h.
