@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { isPaidStatus } from "@/lib/xendit";
 import { findByExternalId, markPaidWithToken } from "@/lib/purchases";
+import { sendDeliveryEmail } from "@/lib/resend";
 import { generateToken } from "@/lib/format";
 
 export const runtime = "nodejs";
@@ -56,6 +57,18 @@ export async function POST(req: Request) {
     if (!updated) {
       // Already paid — nothing to do.
       return NextResponse.json({ received: true, duplicate: true });
+    }
+
+    // Email the download link so the buyer gets it even if the post-payment
+    // redirect never lands (common with GCash + in-app browsers). Non-fatal:
+    // the thank-you page still shows the link, and failing here would trip the
+    // idempotency guard on a Xendit retry.
+    try {
+      const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim();
+      const downloadUrl = `${appUrl}/download/${updated.download_token}`;
+      await sendDeliveryEmail({ to: updated.email, downloadUrl });
+    } catch (mailErr) {
+      console.error(`[webhook] delivery email failed for ${externalId}:`, mailErr);
     }
 
     return NextResponse.json({ received: true });

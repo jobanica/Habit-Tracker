@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { findByExternalId } from "@/lib/purchases";
 import { getInvoice, isPaidStatus } from "@/lib/xendit";
+import { maskEmail } from "@/lib/format";
 import { config } from "@/lib/config";
 import ProcessingRefresh from "@/components/ProcessingRefresh";
 
@@ -78,14 +79,15 @@ export default async function ThankYouPage({
           Open on Google Drive
         </a>
         <p className="mt-4 text-sm text-slate-500">
-          Save your private access link:{" "}
+          Pinadala rin namin ang link sa{" "}
+          <strong>{maskEmail(purchase.email)}</strong>. I-save mo ang{" "}
           <Link
             href={`/download/${purchase.download_token}`}
             className="font-medium text-indigo-600 hover:underline"
           >
-            open it anytime
-          </Link>
-          .
+            private access link
+          </Link>{" "}
+          para ma-access anytime.
         </p>
       </Shell>
     );

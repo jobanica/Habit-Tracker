@@ -22,7 +22,7 @@ export default function PriceBlock() {
           Get the App — {formatPrice()}
         </a>
         <p className="mt-4 text-xs text-slate-500">
-          Secure checkout via Xendit · Instant download pagkatapos magbayad
+          Secure checkout via Xendit · Download sa screen at sa email mo
         </p>
       </div>
     </section>
