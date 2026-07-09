@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { config, formatPrice } from "@/lib/config";
 
 export default function Hero() {
@@ -29,17 +28,23 @@ export default function Hero() {
         </div>
 
         <div className="flex justify-center">
-          {/* Replace /mockup.svg with your real product mockup */}
           <div className="relative">
             <div className="absolute -inset-6 rounded-[3rem] bg-indigo-600/10 blur-2xl" />
-            <Image
-              src="/mockup.svg"
-              alt={`${config.productName} app preview`}
-              width={280}
-              height={560}
-              priority
-              className="relative drop-shadow-2xl"
-            />
+            {/* App reveal video — swap /reveal.mp4 to update */}
+            <div className="relative mx-auto w-[260px] overflow-hidden rounded-[2.5rem] border-[6px] border-slate-900 bg-slate-900 shadow-2xl">
+              <video
+                className="block h-auto w-full"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster="/reveal-poster.jpg"
+                aria-label={`${config.productName} app preview`}
+              >
+                <source src="/reveal.mp4" type="video/mp4" />
+              </video>
+            </div>
           </div>
         </div>
       </div>
