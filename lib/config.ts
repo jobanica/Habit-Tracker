@@ -38,7 +38,7 @@ export const config = {
   invoiceDurationSeconds: 86_400,
 
   // --- Contact / legal ---
-  supportEmail: "support@example.com",
+  supportEmail: "support@gethabittracker.com",
   companyName: "Habit Tracker",
 } as const;
 
