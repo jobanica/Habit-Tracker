@@ -22,12 +22,16 @@ export const config = {
   currency: "PHP" as const,
 
   // --- Delivery ---
-  // The Google Drive link customers get after paying.
-  // In Drive: right-click the file/folder → Share → "Anyone with the link"
-  // (Viewer) → Copy link → paste it here. This link is only ever shown on a
-  // payment-verified page, never on a public page.
-  googleDriveUrl:
-    "https://drive.google.com/drive/folders/11ADoxgmFZ5SupSqh5_4D6NXRes85f6VA?usp=drive_link",
+  // After paying, buyers get a Download button that pulls the product straight
+  // down (no Google Drive page in between). This requires a SINGLE file on
+  // Drive — if your product is multiple files, zip them into one first.
+  //
+  // In Drive: right-click the FILE (not a folder) → Share → "Anyone with the
+  // link" (Viewer) → Copy link. From that link, copy the ID — the part between
+  // "/d/" and "/view" — and paste ONLY that ID below.
+  // Example link: https://drive.google.com/file/d/ABC123xyz/view?usp=sharing
+  //          →    driveFileId: "ABC123xyz"
+  driveFileId: "PASTE_DRIVE_FILE_ID",
 
   // --- Invoice ---
   // How long a Xendit invoice stays payable (seconds). 24h.
@@ -41,4 +45,14 @@ export const config = {
 /** Formatted price string, e.g. "₱149". */
 export function formatPrice(): string {
   return `₱${config.priceAmount.toLocaleString("en-PH")}`;
+}
+
+/**
+ * Direct-download URL for the product file on Google Drive.
+ * The `uc?export=download` form makes Drive serve the file as an attachment
+ * instead of opening its preview page, so the buyer's browser downloads it
+ * immediately. Works for a single shared file (see `driveFileId` above).
+ */
+export function downloadUrl(): string {
+  return `https://drive.google.com/uc?export=download&id=${config.driveFileId}`;
 }

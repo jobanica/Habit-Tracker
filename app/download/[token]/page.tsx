@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { findByToken } from "@/lib/purchases";
-import { config } from "@/lib/config";
+import { config, downloadUrl } from "@/lib/config";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -70,15 +70,15 @@ export default async function DownloadPage({
           Your download is ready
         </h1>
         <p className="mt-2 text-slate-600">
-          Open <strong>{config.productName}</strong> on Google Drive to download it.
+          I-click ang button sa baba para i-download ang{" "}
+          <strong>{config.productName}</strong> mo.
         </p>
         <a
-          href={config.googleDriveUrl}
-          target="_blank"
+          href={downloadUrl()}
           rel="noopener noreferrer"
           className="mt-6 block w-full rounded-xl bg-indigo-600 px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700"
         >
-          Open on Google Drive
+          Download {config.productName}
         </a>
         <p className="mt-4 text-xs text-slate-500">
           Bookmark this page — it&apos;s your private link to access the download
