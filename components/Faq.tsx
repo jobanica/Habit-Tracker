@@ -7,7 +7,7 @@ const faqs = [
   },
   {
     q: "Paano ko makukuha 'yung app?",
-    a: "Pagkatapos magbayad, lalabas agad sa screen ang Google Drive download mo — one click at sa'yo na. Wala pang isang minuto.",
+    a: "Pagkatapos magbayad, lalabas agad sa screen ang Google Drive download mo — at ipapadala rin namin sa email mo. Wala pang isang minuto.",
   },
   {
     q: "May monthly fee ba?",

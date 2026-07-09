@@ -53,7 +53,7 @@ export default function BuySection() {
           className="mx-auto mt-8 flex max-w-md flex-col gap-3 text-left"
         >
           <label htmlFor="buy-email" className="text-sm font-medium text-indigo-100">
-            Saan namin ipapadala ang resibo?
+            Saan namin ipapadala ang download link?
           </label>
           <input
             id="buy-email"
