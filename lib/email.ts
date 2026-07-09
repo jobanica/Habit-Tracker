@@ -1,17 +1,27 @@
 import "server-only";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import { config } from "./config";
 
 /**
- * Resend delivery email. Server-side only.
+ * Delivery email via Gmail SMTP. Server-side only.
  * Sent on payment so buyers always get their download link even if the
  * post-payment redirect fails (common with GCash + in-app browsers).
+ *
+ * Requires GMAIL_USER (the Gmail address) and GMAIL_APP_PASSWORD (a 16-char
+ * Google App Password — NOT your normal Gmail password).
  */
 
-function getClient(): Resend {
-  const key = process.env.RESEND_API_KEY?.trim();
-  if (!key) throw new Error("RESEND_API_KEY is not set");
-  return new Resend(key);
+function getTransport() {
+  const user = process.env.GMAIL_USER?.trim();
+  // App passwords are shown with spaces ("abcd efgh ijkl mnop"); strip them.
+  const pass = process.env.GMAIL_APP_PASSWORD?.replace(/\s+/g, "");
+  if (!user || !pass) {
+    throw new Error("GMAIL_USER and GMAIL_APP_PASSWORD must be set");
+  }
+  return nodemailer.createTransport({
+    service: "gmail",
+    auth: { user, pass },
+  });
 }
 
 function deliveryHtml(downloadUrl: string): string {
@@ -47,18 +57,12 @@ export async function sendDeliveryEmail(params: {
   to: string;
   downloadUrl: string;
 }): Promise<void> {
-  const from = process.env.RESEND_FROM_EMAIL?.trim();
-  if (!from) throw new Error("RESEND_FROM_EMAIL is not set");
-
-  const resend = getClient();
-  const { error } = await resend.emails.send({
-    from,
+  const user = process.env.GMAIL_USER?.trim();
+  const transport = getTransport();
+  await transport.sendMail({
+    from: `${config.productName} <${user}>`,
     to: params.to,
     subject: `Ready na ang ${config.productName} download mo`,
     html: deliveryHtml(params.downloadUrl),
   });
-
-  if (error) {
-    throw new Error(`Resend send failed: ${JSON.stringify(error)}`);
-  }
 }

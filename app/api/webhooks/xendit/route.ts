@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { isPaidStatus } from "@/lib/xendit";
 import { findByExternalId, markPaidWithToken } from "@/lib/purchases";
-import { sendDeliveryEmail } from "@/lib/resend";
+import { sendDeliveryEmail } from "@/lib/email";
 import { generateToken } from "@/lib/format";
 
 export const runtime = "nodejs";
