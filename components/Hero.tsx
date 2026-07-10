@@ -19,7 +19,7 @@ export default function Hero() {
               href="#buy"
               className="w-full rounded-xl bg-indigo-600 px-8 py-4 text-center text-lg font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700 sm:w-auto"
             >
-              Get the App — {formatPrice()}
+              Get {config.productName} — {formatPrice()}
             </a>
             <span className="text-sm text-slate-500">
               GCash · Maya · Card · Instant download after payment
