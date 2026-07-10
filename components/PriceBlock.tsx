@@ -1,4 +1,4 @@
-import { formatPrice } from "@/lib/config";
+import { config, formatPrice } from "@/lib/config";
 
 export default function PriceBlock() {
   return (
@@ -19,7 +19,7 @@ export default function PriceBlock() {
           href="#buy"
           className="mt-8 block w-full rounded-xl bg-indigo-600 px-8 py-4 text-center text-lg font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700"
         >
-          Get the App — {formatPrice()}
+          Get {config.productName} — {formatPrice()}
         </a>
         <p className="mt-4 text-xs text-slate-500">
           Secure checkout via Xendit · Download sa screen at sa email mo
